@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class DemoApplicationTests {
 
 	@Autowired
@@ -19,9 +19,9 @@ class DemoApplicationTests {
 	void contextLoads() {
 	}
 
-	@Test
-	public void kafkaTest(){
-		debugKafkaProduceJdzDelegate.sendMessage("test", "message1");
-	}
+//	@Test
+//	public void kafkaTest(){
+//		debugKafkaProduceJdzDelegate.sendMessage("test", "message1");
+//	}
 
 }

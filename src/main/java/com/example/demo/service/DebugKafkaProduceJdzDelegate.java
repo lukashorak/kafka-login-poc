@@ -33,7 +33,7 @@ public class DebugKafkaProduceJdzDelegate {
 			String uuid = UUID.randomUUID().toString();
 			this.kafkaTemplate().send(selectedTopic, uuid, msg);
 			//this.kafkaTemplate().send(kafkaTopic, "test1");
-			LOGGER.info(String.format("Kafka message %s to topic: %s sent", uuid, kafkaTopic));
+			LOGGER.info(String.format("Kafka message %s to topic: %s sent", uuid, selectedTopic));
 		}else{
 			LOGGER.info("kafkaTemplate is missing");
 		}

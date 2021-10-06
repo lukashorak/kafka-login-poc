@@ -3,6 +3,8 @@ package com.example.demo.config;
 import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.config.SaslConfigs;
+import org.apache.kafka.common.config.SslConfigs;
+import org.apache.kafka.common.security.auth.SslEngineFactory;
 import org.apache.kafka.common.security.plain.PlainLoginModule;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,8 +14,18 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLEngine;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 
 @Configuration
@@ -39,13 +51,13 @@ public class KafkaProducerConfig {
 	@Value("${poc.kafka.trustStoreLocation:default}")
 	private String trustStoreLocation;
 
-	@Value("${poc.kafka.trustStorePassword:default}")
+	@Value("${poc.kafka.trustStorePassword:changeit}")
 	private String trustStorePassword;
 
 	@Value("${poc.kafka.trustStoreType:default}")
 	private String trustStoreType;
 
-	@Value("${poc.kafka.keyStorePassword:default}")
+	@Value("${poc.kafka.keyStorePassword:changeit}")
 	private String keyStorePassword;
 
 	@Value("${poc.kafka.keyStoreLocation:default}")
@@ -56,6 +68,9 @@ public class KafkaProducerConfig {
 
 	@Bean
 	public ProducerFactory<String, String> bpmProducerFactory() {
+
+
+
 		Map<String, Object> configProps = new HashMap<>();
 		configProps.put(
 				ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
@@ -90,6 +105,9 @@ public class KafkaProducerConfig {
 			configProps.put("ssl.keystore.password", keyStorePassword);
 			configProps.put("ssl.keystore.location", keyStoreLocation);
 			configProps.put("ssl.keystore.type", keyStoreType);
+
+			configProps.put(SslConfigs.SSL_ENDPOINT_IDENTIFICATION_ALGORITHM_CONFIG, "");
+
 			LOGGER.info("Setting security: " + security);
 		}
 

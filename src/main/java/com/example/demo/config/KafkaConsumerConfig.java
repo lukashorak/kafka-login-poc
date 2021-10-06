@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.config.SaslConfigs;
+import org.apache.kafka.common.config.SslConfigs;
 import org.apache.kafka.common.security.plain.PlainLoginModule;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -102,6 +103,9 @@ public class KafkaConsumerConfig {
 			props.put("ssl.keystore.password", keyStorePassword);
 			props.put("ssl.keystore.location", keyStoreLocation);
 			props.put("ssl.keystore.type", keyStoreType);
+
+			props.put(SslConfigs.SSL_ENDPOINT_IDENTIFICATION_ALGORITHM_CONFIG, "");
+
 			LOGGER.info("Setting security: " + security);
 		}
 
