@@ -7,8 +7,12 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
+import java.util.logging.Logger;
+
 @Service
 public class StartupHook {
+
+    private final static Logger LOGGER = Logger.getLogger("StartupHook");
 
     @Autowired
     KafkaActuatorService kafkaActuatorService;
@@ -18,7 +22,8 @@ public class StartupHook {
 
     @EventListener(ApplicationReadyEvent.class)
     public void doSomethingAfterStartup() {
-        System.out.println("hello world, I have just started up");
+        LOGGER.info("Startup Hook - Start");
         debugKafkaProduceJdzDelegate.sendMessage("test", "message1");
+        LOGGER.info("Startup Hook - Done");
     }
 }

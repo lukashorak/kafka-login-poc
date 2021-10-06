@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 @Service
 public class KafkaActuatorService {
 
-	private final static Logger LOGGER = Logger.getLogger("BpmKafkaActuatorService");
+	private final static Logger LOGGER = Logger.getLogger("KafkaActuatorService");
 
 	@Value("${poc.actuator.kafka.topic}")
 	private String topicName;

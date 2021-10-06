@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 @Configuration
 public class KafkaProducerConfig {
 
-	private final static Logger LOGGER = Logger.getLogger("BpmKafkaProducerConfig");
+	private final static Logger LOGGER = Logger.getLogger("KafkaProducerConfig");
 
 	@Value("${poc.kafka.kafkaAddress}")
 	private String kafkaAddress;
